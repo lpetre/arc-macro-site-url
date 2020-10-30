@@ -5,7 +5,7 @@ Allows lambdas to discover the site's url via a SSM parameter
 ## Add to your project
 
 ```bash
-npm i @lpetre/arc-macro-site-url
+npm i arc-macro-site-url
 ```
 
 And add to your `.arc` file:
@@ -18,7 +18,7 @@ testapp
 get /
 
 @macros
-lpetre/arc-marco-site-url
+arc-macro-site-url
 ```
 
 ## Query the site url
@@ -27,15 +27,23 @@ To use the absolute url you need to query it in your handler.
 
 ```bash
 cd src/http/get-index 
-npm i @lpetre/arc-marco-site-url
+npm i arc-macro-site-url
 ```
 
 And then in the function code:
 
 ```javascript
-let discovery = require('@lpetre/arc-marco-site-url/discovery')
+let arc = require("@architect/functions")
+let discovery = require('@lpetre/arc-macro-site-url/discovery')
 
-exports.handler = async function http(req) {
-    ...
+async function req (req) {
+  let site_url = await discovery()
+  return {
+    html: `<body><p>Welcome to <a href="${site_url}">${site_url}</a>!</p></body>`
+  }
 }
+
+exports.handler = arc.http.async(req);
 ```
+
+For a complete example see [arc-example-site-url](https://github.com/lpetre/arc-example-site-url)

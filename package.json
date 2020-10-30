@@ -1,6 +1,6 @@
 {
   "name": "arc-macro-site-url",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A simple macro to expose the site's absolute URL as a SSM Parameter",
   "main": "index.js",
   "scripts": {
